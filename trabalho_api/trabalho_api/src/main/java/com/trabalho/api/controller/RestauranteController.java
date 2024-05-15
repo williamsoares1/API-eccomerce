@@ -67,6 +67,9 @@ public class RestauranteController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletarProduto(@PathVariable Long id) {
-		return ResponseEntity.of(service.deletar(id));
+		if(!service.deletar(id)){
+            return ResponseEntity.notFound().build();
+        };
+        return ResponseEntity.noContent().build();
 	}
 }

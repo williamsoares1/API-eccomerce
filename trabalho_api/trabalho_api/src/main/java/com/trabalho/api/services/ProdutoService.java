@@ -64,8 +64,13 @@ public class ProdutoService {
         return Optional.empty();
     }
 
-    public Optional<Void> deletar(Long id) {
-        repository.deleteById(id);
-        return Optional.of(null);
+    public Boolean deletar(Long id) {
+
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return true;
+        }
+
+        return false;
     }
 }

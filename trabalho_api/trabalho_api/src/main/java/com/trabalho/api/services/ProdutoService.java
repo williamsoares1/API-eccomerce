@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.trabalho.api.dtos.ProdutoDTO;
 import com.trabalho.api.entity.Produto;
+import com.trabalho.api.entity.Tipo;
 import com.trabalho.api.repository.ProdutoRepository;
 
 @Service
@@ -68,7 +69,7 @@ public class ProdutoService {
         return repository.findByPrecoBetween(BigDecimal.valueOf(menor), BigDecimal.valueOf(maior)).stream().map(p -> new ProdutoDTO(p.getId(), p.getNome(), p.getDescricao(), p.getPreco(), p.getTipo())).collect(Collectors.toList());
     }
 
-    public List<ProdutoDTO> buscarPorDescricao(String desc) {
-        return repository.findByDescricaoContaining(desc).stream().map(p -> new ProdutoDTO(p.getId(), p.getNome(), p.getDescricao(), p.getPreco(), p.getTipo())).collect(Collectors.toList());
+    public List<ProdutoDTO> buscarPorTipo(Tipo tipo) {
+        return repository.findByTipo(tipo).stream().map(p -> new ProdutoDTO(p.getId(), p.getNome(), p.getDescricao(), p.getPreco(), p.getTipo())).collect(Collectors.toList());
     }
 }

@@ -26,6 +26,7 @@ public class ControllerHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<Object>(erros, HttpStatus.NOT_ACCEPTABLE);
     }
 
+    @SuppressWarnings("null")
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
             HttpHeaders headers, HttpStatusCode status, WebRequest request) {

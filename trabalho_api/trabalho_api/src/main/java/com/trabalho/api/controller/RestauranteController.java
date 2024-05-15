@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.trabalho.api.dtos.MenorMaiorDTO;
 import com.trabalho.api.dtos.ProdutoDTO;
 import com.trabalho.api.services.ProdutoService;
 
@@ -28,13 +29,28 @@ public class RestauranteController {
 	private ProdutoService service;
 
 	@GetMapping
-	public ResponseEntity<List<ProdutoDTO>> buscarTodosOsProdutos() {
+	public ResponseEntity<List<ProdutoDTO>> buscarTodos() {
 		return ResponseEntity.ok(service.buscarTodos());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ProdutoDTO> buscarProdutoPorId(@PathVariable Long id) {
+	public ResponseEntity<ProdutoDTO> buscarPorId(@PathVariable Long id) {
 		return ResponseEntity.of(service.buscarPorId(id));
+	}
+
+	@GetMapping("/nome")
+	public ResponseEntity<List<ProdutoDTO>> buscarPorNome(@RequestBody String nome){
+		return ResponseEntity.ok(service.buscarPorNome(nome));
+	}
+
+	@GetMapping("/descricao")
+	public ResponseEntity<List<ProdutoDTO>> buscarPorDescricao(@RequestBody String desc){
+		return ResponseEntity.ok(service.buscarPorDescricao(desc));
+	}
+
+	@GetMapping("/preco")
+	public ResponseEntity<List<ProdutoDTO>> buscarPorPreco(@RequestBody MenorMaiorDTO dto){
+		return ResponseEntity.ok(service.buscarPorPreco(dto.menor(), dto.maior()));
 	}
 
 	@PostMapping

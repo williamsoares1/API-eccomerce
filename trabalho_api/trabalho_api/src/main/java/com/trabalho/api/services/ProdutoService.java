@@ -39,6 +39,14 @@ public class ProdutoService {
         return repository.findByNomeContaining(nome).stream().map(p -> new ProdutoDTO(p.getId(), p.getNome(), p.getDescricao(), p.getPreco(), p.getTipo())).collect(Collectors.toList());
     }
 
+    public List<ProdutoDTO> buscarPorPreco(Double menor, Double maior) {
+        return repository.findByPrecoBetween(BigDecimal.valueOf(menor), BigDecimal.valueOf(maior)).stream().map(p -> new ProdutoDTO(p.getId(), p.getNome(), p.getDescricao(), p.getPreco(), p.getTipo())).collect(Collectors.toList());
+    }
+
+    public List<ProdutoDTO> buscarPorTipo(Tipo tipo) {
+        return repository.findByTipo(tipo).stream().map(p -> new ProdutoDTO(p.getId(), p.getNome(), p.getDescricao(), p.getPreco(), p.getTipo())).collect(Collectors.toList());
+    }
+
     public ProdutoDTO cadastrar(ProdutoDTO produto) {
         Produto produtoEntity = produto.toEntity();
         repository.save(produtoEntity);
@@ -56,20 +64,8 @@ public class ProdutoService {
         return Optional.empty();
     }
 
-    public Optional<Boolean> deletar(Long id) {
-        if (!repository.existsById(id)) {
-            return Optional.empty();
-        }
-
+    public Optional<Void> deletar(Long id) {
         repository.deleteById(id);
-        return Optional.of(true);
-    }
-
-    public List<ProdutoDTO> buscarPorPreco(Double menor, Double maior) {
-        return repository.findByPrecoBetween(BigDecimal.valueOf(menor), BigDecimal.valueOf(maior)).stream().map(p -> new ProdutoDTO(p.getId(), p.getNome(), p.getDescricao(), p.getPreco(), p.getTipo())).collect(Collectors.toList());
-    }
-
-    public List<ProdutoDTO> buscarPorTipo(Tipo tipo) {
-        return repository.findByTipo(tipo).stream().map(p -> new ProdutoDTO(p.getId(), p.getNome(), p.getDescricao(), p.getPreco(), p.getTipo())).collect(Collectors.toList());
+        return Optional.of(null);
     }
 }

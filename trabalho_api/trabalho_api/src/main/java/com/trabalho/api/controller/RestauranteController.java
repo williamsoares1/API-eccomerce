@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.trabalho.api.dtos.MenorMaiorDTO;
 import com.trabalho.api.dtos.ProdutoDTO;
 import com.trabalho.api.dtos.TipoDTO;
+import com.trabalho.api.entity.Tipo;
 import com.trabalho.api.services.ProdutoService;
 
 import jakarta.validation.Valid;
@@ -47,6 +48,11 @@ public class RestauranteController {
 	@GetMapping("/tipo")
 	public ResponseEntity<List<ProdutoDTO>> buscarPorTipo(@RequestBody TipoDTO dto){
 		return ResponseEntity.ok(service.buscarPorTipo(dto.tipo()));
+	}
+
+	@GetMapping("/tipo/{tipo}")
+	public ResponseEntity<List<ProdutoDTO>> buscarPorTipo(@PathVariable String tipo){
+		return ResponseEntity.ok(service.buscarPorTipo(Tipo.valueOf(tipo.toUpperCase())));
 	}
 
 	@GetMapping("/preco")

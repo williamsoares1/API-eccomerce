@@ -22,7 +22,7 @@ public class Produto {
     private Long id;
     private String nome;
     private String descricao;
-    @Column(name = "preco_REAIS")
+    @Column(name = "preco_reais")
     private BigDecimal preco;
     @Enumerated(EnumType.STRING)
     private Tipo tipo;

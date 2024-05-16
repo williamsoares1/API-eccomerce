@@ -50,7 +50,7 @@ public class RestauranteController {
 		return ResponseEntity.ok(service.buscarPorTipo(dto.tipo()));
 	}
 
-	@GetMapping("/{tipo}")
+	@GetMapping("/tipo/{tipo}")
 	public ResponseEntity<List<ProdutoDTO>> buscarPorTipo(@PathVariable String tipo){
 		return ResponseEntity.ok(service.buscarPorTipo(Tipo.valueOf(tipo.toUpperCase())));
 	}

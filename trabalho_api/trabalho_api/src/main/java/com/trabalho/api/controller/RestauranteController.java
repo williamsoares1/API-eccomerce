@@ -50,7 +50,7 @@ public class RestauranteController {
 		return ResponseEntity.ok(service.buscarPorTipo(dto.tipo()));
 	}
 
-	@GetMapping("/tipo/{tipo}")
+	@GetMapping("/{tipo}")
 	public ResponseEntity<List<ProdutoDTO>> buscarPorTipo(@PathVariable String tipo){
 		return ResponseEntity.ok(service.buscarPorTipo(Tipo.valueOf(tipo.toUpperCase())));
 	}
@@ -67,7 +67,7 @@ public class RestauranteController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ProdutoDTO> AlterarProduto(@Valid @PathVariable Long id, @RequestBody ProdutoDTO produtoAlterado) {
+	public ResponseEntity<ProdutoDTO> AlterarProduto(@Valid @PathVariable Long id, @Valid @RequestBody ProdutoDTO produtoAlterado) {
 		return ResponseEntity.of(service.alterar(id, produtoAlterado));
 	}
 

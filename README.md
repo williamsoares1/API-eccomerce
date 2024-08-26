@@ -1,1 +1,1 @@
-# trabalho_API_GRUPO_2
+# API desenvolvida durante o SERRATEC 2024.1
